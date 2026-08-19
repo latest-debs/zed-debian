@@ -1,0 +1,9 @@
+# Package definition for zed
+
+package_name: zed
+github_repo: zed-industries/zed
+artifact_format: tar.gz
+description: "A high-performance, multiplayer code editor with built-in collaboration, written in Rust."
+license: GPL-2.0
+
+# Build for all Debian suites and all supported architectures.

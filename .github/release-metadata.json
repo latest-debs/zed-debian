@@ -1,0 +1,27 @@
+{
+  "package": "zed",
+  "upstream_repo": "zed-industries/zed",
+  "version": "v1.15.1",
+  "tag": "v1.15.1",
+  "published_at": "2026-08-18T16:05:04Z",
+  "license": "NOASSERTION",
+  "asset": "zed-linux-aarch64.tar.gz",
+  "asset_size": 153723023,
+  "sha256": "bd6186135cd7f909c8b487e89f2da1d0be0e0c8cebd3be36a707b9823194749a",
+  "expected_sha256": "",
+  "checksum_source": "",
+  "checksum_verified": false,
+  "assets": {
+    "zed-linux-aarch64.tar.gz": {
+      "sha256": "bd6186135cd7f909c8b487e89f2da1d0be0e0c8cebd3be36a707b9823194749a",
+      "size": 153723023
+    },
+    "zed-linux-x86_64.tar.gz": {
+      "sha256": "b9a8a080e707487111436665270a0c961b21a06b86f194375a0c940067cb1a17",
+      "size": 159865088
+    }
+  },
+  "asset_count": 2,
+  "vetted_at": "2026-08-19T15:19:13Z",
+  "vetted_by": ""
+}

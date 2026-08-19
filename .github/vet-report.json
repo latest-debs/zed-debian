@@ -1,0 +1,45 @@
+{
+  "gate": "fail",
+  "license": {
+    "declared": "GPL-2.0",
+    "detected": [
+      "Unicode-3.0"
+    ],
+    "license_files": [
+      "//tmp/tmp.gOokRF5171/x/zed.app/licenses.md"
+    ],
+    "matches": false,
+    "status": "fail",
+    "detail": "declared GPL-2.0 but detected Unicode-3.0"
+  },
+  "asset": {
+    "format": "tar.gz",
+    "size": 153723023,
+    "valid": true,
+    "is_html": false,
+    "binary": "zed",
+    "elf_arch": "ARM aarch64",
+    "status": "pass",
+    "detail": "valid tar.gz archive containing 23 ELF executable(s); first: zed (ARM aarch64); release covers: amd64 arm64 "
+  },
+  "architectures": {
+    "covered": [
+      "amd64",
+      "arm64"
+    ],
+    "missing": [
+      "armel",
+      "armhf",
+      "i386",
+      "ppc64el",
+      "s390x",
+      "riscv64",
+      "loong64"
+    ],
+    "assets": {
+      "amd64": "zed-linux-x86_64.tar.gz",
+      "arm64": "zed-linux-aarch64.tar.gz"
+    }
+  },
+  "vetted_at": "2026-08-19T15:19:19Z"
+}
