@@ -200,7 +200,14 @@ jobs:
             [ "$ok" = 1 ] || { echo "SMOKE_FAIL:$name"; exit 1; }
           done
           echo "ALL_OK"'
-          out="$(docker run --rm -v "$PWD/$DEB:/pkg.deb:ro" debian:$SUITE \
+          # ZED_ALLOW_ROOT: zed refuses to run as root/sudo by design (its
+          # own safety check, unrelated to packaging) - this container
+          # always runs as root, so every invocation fails before printing
+          # a version string without this, regardless of libs/symlinks.
+          # NOTE: this is a zed-specific addition on top of the shared
+          # template's generic smoke test - re-add it if a future
+          # `rollout-autowatch.sh` run regenerates this file and drops it.
+          out="$(docker run --rm -e ZED_ALLOW_ROOT=true -v "$PWD/$DEB:/pkg.deb:ro" debian:$SUITE \
             bash -c "$smoke_script" _ /pkg.deb "$EXPECTED" "${bin_names[@]}" 2>&1)"
           echo "$out"
           if ! echo "$out" | grep -q "^ALL_OK$"; then
