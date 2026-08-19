@@ -174,7 +174,18 @@ jobs:
             name="$(basename "$bin")"
             ok=0
             for arg in --version -V version; do
-              out="$(docker run --rm -v "$PWD/smoke-root/usr/bin:/bins:ro" debian:$SUITE bash -c "chmod +x /bins/$name; /bins/$name $arg 2>&1 || true")"
+              # zed's bundle-mode package ships usr/bin/zed as a symlink to
+              # /usr/lib/zed/bin/zed (kept alongside lib/libexec so its
+              # $ORIGIN-relative RPATH resolves) - mounting only usr/bin,
+              # like other packages' generic smoke test, leaves that symlink
+              # dangling inside the container. Additionally mount
+              # usr/lib/zed - a path that doesn't exist in the base image,
+              # so this is purely additive and doesn't touch the container's
+              # real /usr/lib (shared libc etc. bash/coreutils need to run).
+              out="$(docker run --rm \
+                -v "$PWD/smoke-root/usr/bin:/bins" \
+                -v "$PWD/smoke-root/usr/lib/zed:/usr/lib/zed:ro" \
+                debian:$SUITE bash -c "chmod +x /bins/$name; /bins/$name $arg 2>&1 || true")"
               if [ -n "$out" ] && printf '%s' "$out" | grep -q "$EXPECTED"; then
                 echo "  OK: $name $arg (on $SUITE) -> $(printf '%s' "$out" | head -1)"
                 ok=1
