@@ -197,7 +197,11 @@ for name in "$@"; do
   [ "$ok" = 1 ] || { echo "SMOKE_FAIL:$name"; exit 1; }
 done
 echo "ALL_OK"'
-          out="$(docker run --rm -v "$PWD/$DEB:/pkg.deb:ro" debian:$SUITE \
+          # ZED_ALLOW_ROOT: zed refuses to run as root/sudo by design (its
+          # own safety check, unrelated to packaging) - the smoke container
+          # always runs as root, so without this every invocation fails
+          # before printing a version string, regardless of libs/symlinks.
+          out="$(docker run --rm -e ZED_ALLOW_ROOT=true -v "$PWD/$DEB:/pkg.deb:ro" debian:$SUITE \
             bash -c "$smoke_script" _ /pkg.deb "$EXPECTED" "${bin_names[@]}" 2>&1)"
           echo "$out"
           if ! echo "$out" | grep -q "^ALL_OK$"; then
