@@ -6,4 +6,12 @@ artifact_format: tar.gz
 description: "A high-performance, multiplayer code editor with built-in collaboration, written in Rust."
 license: GPL-2.0
 
+# zed ships a full app-bundle tree (zed.app/{bin,lib,libexec,share}) rather
+# than standalone binaries - bin/zed's $ORIGIN-relative RPATH only resolves
+# correctly if lib/ and libexec/ stay siblings on disk. bundle installs the
+# whole binary_path tree under /usr/lib/zed/ and symlinks its bin/ into
+# /usr/bin (requires debian-multiarch-builder v.0.1a16+).
+binary_path: "zed.app"
+bundle: true
+
 # Build for all Debian suites and all supported architectures.
